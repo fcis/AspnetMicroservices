@@ -12,7 +12,7 @@ namespace Catalog.API.Controllers
         private readonly IProductRepository _repository;
         private readonly ILogger _logger;
 
-        public CatalogController(IProductRepository repository, ILogger logger)
+        public CatalogController(IProductRepository repository, ILogger<CatalogController> logger)
         {
             _repository = repository;
             _logger = logger;

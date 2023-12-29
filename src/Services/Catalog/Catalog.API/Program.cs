@@ -10,7 +10,6 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddMvcCore();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,8 +18,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
+app.UseRouting();
+app.MapControllers();
 app.Run();
 
 
