@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ordering.Application.Contracts.Persistence
 {
-    public interface IOrderRepository :IAsyncRepository<Order>
+    public interface IOrderRepository :IAsyncGenericRepository<Order>
     {
         Task<IEnumerable<Order>> GetOrdersByUserName(string userName);
     }
