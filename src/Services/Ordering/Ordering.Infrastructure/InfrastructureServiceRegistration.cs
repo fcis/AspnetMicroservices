@@ -29,6 +29,6 @@ namespace Ordering.Infrastructure
             services.AddTransient<IEmailService, EmailService>();
 
             return services;
-        }
+         }
     }
 }
