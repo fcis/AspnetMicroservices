@@ -36,6 +36,7 @@ builder.Services.AddMassTransit(config => {
         cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
         });
     });
+
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 var app = builder.Build();
