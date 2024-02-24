@@ -16,9 +16,9 @@ namespace Basket.API.Repositories
             _redisCache = redisCache;
         }
 
-        public Task DeleteBasketAsync(string userName)
+        public async Task DeleteBasketAsync(string userName)
         {
-            throw new NotImplementedException();
+            await _redisCache.RemoveAsync(userName);
         }
 
         public async Task<ShoppingCart> GetBasketAsync(string userName)

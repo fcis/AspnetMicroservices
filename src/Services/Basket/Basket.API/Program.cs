@@ -12,16 +12,24 @@ var configValue = builder.Configuration.GetValue<string>("CacheSettings:Connecti
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+// Redis Configuration
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = configValue;
 });
+
+// General Configuration
 builder.Services.AddScoped<IBasketRepository,BasketRepository>();
+builder.Services.AddAutoMapper(typeof(Program));
+
 // Grpc Configuration
 var GrpcConfigValue = builder.Configuration.GetValue<string>("GrpcSettings:DiscountUrl");
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
     (o => o.Address = new Uri(GrpcConfigValue.ToString()));
 builder.Services.AddScoped<DiscountGrpcService>();
+
+
 // MassTransit-RabbitMQ Configuration
 builder.Services.AddMassTransit(config => {
     config.UsingRabbitMq((ctx, cfg) => {
