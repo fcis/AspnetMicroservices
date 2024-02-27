@@ -1,5 +1,6 @@
 using EventBus.Messages.Common;
 using MassTransit;
+using Microsoft.AspNetCore.Hosting;
 using Ordering.API.EventBusConsumer;
 using Ordering.API.Extensions;
 using Ordering.Application;
@@ -31,7 +32,9 @@ builder.Services.AddMassTransit(config => {
         });
     });
 });
-
+// General Configuration
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<BasketCheckoutConsumer>();
 var app = builder.Build();
 app.MigrateDatabase<OrderContext>((context, services) =>
 {
@@ -40,6 +43,7 @@ app.MigrateDatabase<OrderContext>((context, services) =>
         .SeedAsync(context, logger)
         .Wait();
 });
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
